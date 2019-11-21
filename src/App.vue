@@ -1,32 +1,56 @@
 <template>
+
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <loading v-show="requestLoading"/>
     <router-view/>
   </div>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import Loading from '@/components/Loading.vue'
+import { mapState } from 'vuex'
+// import { setTimeout } from 'timers'
+// import { login } from './request/api'
+export default {
+  data () {
+    return {
     }
+  },
+  components: {
+    Loading
+  },
+  async created () {
+    // if(process.env.NODE_ENV === 'production') {
+    //   this.$router.replace({name: 'start'})
+    //   login().catch(err => {
+    //     console.log(err)
+    //   })
+    // }
+  },
+  computed: {
+    ...mapState([
+      'requestLoading'
+    ])
+  },
+  mounted () {
   }
 }
+</script>
+<style lang="scss">
+html,body {
+  height:100%;
+}
+#app {
+  height:100%;
+}
+.mint-toast {
+  border-radius: 20px!important;
+  padding:30px 48px!important;
+  max-width:464px!important;
+  line-height:48px;
+}
+.mint-toast-text {
+  font-size:26px!important;
+}
+
+
 </style>

@@ -5,6 +5,16 @@ import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
 const routes = [
+   // 列表页
+//    {
+//     path: '/',
+//     name: 'list',
+//     component: () =>
+//         import ('./views/List.vue'),
+//     meta: {
+//         title: '列表页'
+//     }
+// },
   {
     path: '/',
     name: 'home',
@@ -21,7 +31,15 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+  mode: 'hash',
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+        return savedPosition
+    } else {
+        return { x: 0, y: 0 }
+    }
+}
 })
 
 export default router
