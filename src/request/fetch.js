@@ -1,97 +1,148 @@
-import axios from 'axios'
+import axios from 'axios';
+// import router from '../router/index'
+// import { loStorage } from '@/libs/storage.js';
 import store from '@/store'
-// import { Toast } from 'vant'
+import qs from 'qs'
 
-// 创建axios 实例
-const service = axios.create({
-  // baseURL: '', // api的base_url
-  timeout: 10000 // 请求超时时间
-})
+axios.defaults.timeout = 3000;
 
-// request 拦截器
-service.interceptors.request.use(
-  config => {
-    // 这里可以自定义一些config 配置
+axios.defaults.baseURL = '';
 
-    // loading + 1
-    store.dispatch('setLoading', true)
+//http request 拦截器
+axios.interceptors.request.use(
+    config => {
 
-    return config
-  },
-  error => {
-    // 这里处理一些请求出错的情况
-    // loading 清 0
-    setTimeout(function () {
-      store.dispatch('setLoading', 0)
-    }, 300)
+      store.dispatch('setLoading', true)
+        const _isJSON = config.responseType === 'json' || config.responseType === 'JSON';
 
-    console.log(error)
-    return Promise.reject(error)
-  }
+        const data = config.data;
+
+        config.data = !_isJSON ? qs.stringify(data) : JSON.stringify(data);
+
+        config.headers['Content-Type'] = _isJSON ? 'application/json' : 'application/x-www-form-urlencoded';
+
+        config.headers['auth-token'] = localStorage.getItem('token');
+        config.headers['x-auth-token'] = localStorage.getItem('token');
+
+        return config;
+    },
+    error => {
+      store.dispatch('setLoading', false)
+        return Promise.reject(error);
+    }
+);
+
+
+//http response 拦截器
+axios.interceptors.response.use(
+    response => {
+      store.dispatch('setLoading', false)
+        return response;
+
+       
+    },
+    error => {
+        return Promise.reject(error)
+    }
 )
 
-// response 拦截器
-service.interceptors.response.use(
-  response => {
-    const res = response.data
-    // 这里处理一些response 正常放回时的逻辑
 
-    // loading - 1
-    store.dispatch('setLoading', false)
+/**
+ * 封装get方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
 
-    return res
-  },
-  error => {
-    // 这里处理一些response 出错时的逻辑
-
-    // loading - 1
-    store.dispatch('setLoading', false)
-
-    return Promise.reject(error)
-  }
-)
-
-let fetch = (options) => {
-  return new Promise((resolve, reject) => {
-    service({
-      ...options,
-      withCredentials: true
-      // paramsSerializer: params => {
-      //   return qs.stringify(params, { indices: false })
-      // }
-    }).then(data => {
-      // 对createSignature 单独处理
-      // if (options.url === '/weixin/createSignature') {
-      //   resolve(data)
-      //   return
-      // }
-
-      resolve(data)
-      //请求成功后操作
-      // if (options.codeResult) { // 需要返回全部数据
-      //   resolve(data)
-      // } else {
-      //   let { code, message } = data.meta
-      //   if (code === '0') {
-      //     resolve(data.object)
-      //   } else if (code === '1001') {
-      //     login()
-      //   } else {
-      //     Toast(message)
-      //     // resolve(data)
-      //     reject({
-      //       code,
-      //       message
-      //     })
-      //   }
-      // }
-    }).catch(error => {
-      console.log('请求异常信息：' + error)
-      reject(error)
+export function get(url, params = {}) {
+    // console.log('getrtttt', url, params)
+    return new Promise((resolve, reject) => {
+        axios.get(url, {
+            params: { ...params }
+            })
+            .then(response => {
+                resolve(response.data);
+            })
+            .catch(err => {
+                reject(err)
+            })
     })
-  }).catch(error => {
-    console.log(`code:${error.code},message: ${error.message}`)
-  })
 }
 
-export default fetch
+
+/**
+ * 封装post请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+export function post(url, data = {}) {
+    return new Promise((resolve, reject) => {
+        axios.post(url, data)
+            .then(response => {
+                resolve(response.data);
+            }, err => {
+                reject(err)
+            })
+    })
+}
+
+
+/**
+ * 封装post请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+export function json(url, data = {}) {
+    return new Promise((resolve, reject) => {
+        axios({
+            url: url,
+            method: 'post',
+            data: data,
+            responseType: 'json'
+        }).then(response => {
+            resolve(response.data);
+        }, err => {
+            reject(err)
+        })
+    })
+}
+
+/**
+ * 封装patch请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+export function patch(url, data = {}) {
+    return new Promise((resolve, reject) => {
+        axios.patch(url, data)
+            .then(response => {
+                resolve(response.data);
+            }, err => {
+                reject(err)
+            })
+    })
+}
+
+/**
+ * 封装put请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+export function put(url, data = {}) {
+    return new Promise((resolve, reject) => {
+        axios.put(url, data)
+            .then(response => {
+                resolve(response.data);
+            }, err => {
+                reject(err)
+            })
+    })
+}

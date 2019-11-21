@@ -1,4 +1,4 @@
-import fetch from './fetch'
+import {get} from './fetch'
 import store from '../store/index'
 import router from '../router'
 import Vue from 'vue'
@@ -14,6 +14,7 @@ import {
   CURRENT_INFO
 } from './url'
 
+const fetch = function(){}
 /**
  * @description: 获取微信支付需要的信息
  * @param {Object} 
@@ -151,13 +152,14 @@ export function createSignature () {
   if (url.indexOf('#') > -1) {
     url = url.substring(0, url.indexOf('#'))
   }
-  return fetch({
-    url: CREATE_SIGNATURE,
-    method: 'get',
-    params: {
-      url
-    }
-  })
+  return get(CREATE_SIGNATURE, url)
+  // return fetch({
+  //   url: CREATE_SIGNATURE,
+  //   method: 'get',
+  //   params: {
+  //     url
+  //   }
+  // })
 }
 
 /**

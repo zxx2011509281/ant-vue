@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './libs/rem'
+import './utils/depend.js'
+import './utils/tool.js'
 import wx from 'weixin-js-sdk'
 
 Vue.config.productionTip = false
