@@ -5,35 +5,55 @@ import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
 const routes = [
-   // 列表页
-//    {
-//     path: '/',
-//     name: 'list',
-//     component: () =>
-//         import ('./views/List.vue'),
-//     meta: {
-//         title: '列表页'
-//     }
-// },
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: Home,
+    meta: {
+      title: '百城书香 阅读校园'
+    }
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/appraisaled', 
+    name: 'appraisaled',
+    component: () => import(/* webpackChunkName: "about" */ '../views/appraisaled.vue'),
+    meta: {
+      title: '个人测评结果'
+    }
+  },
+  {
+    path: '/schoolResult',
+    name: 'schoolResult',
+    component: () => import(/* webpackChunkName: "about" */ '../views/schoolResult.vue'),
+    meta: {
+      title: '园所测评结果'
+    }
+  },
+  {
+    path: '/do',
+    name: 'do',
+    component: () => import(/* webpackChunkName: "about" */ '../views/do.vue'),
+    meta: {
+      title: '阅读测评'
+    }
+  },
+  {
+    path: '/result',
+    name: 'result',
+    component: () => import(/* webpackChunkName: "about" */ '../views/result.vue'),
+    meta: {
+      title: '测评结果'
+    }
+  },
 ]
 
 const router = new VueRouter({
   mode: 'hash',
   routes,
   scrollBehavior(to, from, savedPosition) {
+    if (to.meta.title) {
+      document.title = to.meta.title
+    }
     if (savedPosition) {
         return savedPosition
     } else {

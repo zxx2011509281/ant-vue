@@ -1,56 +1,61 @@
 <template>
-
   <div id="app">
-    <loading v-show="requestLoading"/>
-    <router-view/>
+    <loading v-show="requestLoading" />
+    <router-view />
   </div>
 </template>
 <script>
-import Loading from '@/components/Loading.vue'
-import { mapState } from 'vuex'
-// import { setTimeout } from 'timers'
-// import { login } from './request/api'
+import Loading from "@/components/Loading.vue";
+import { mapState } from "vuex";
 export default {
-  data () {
+  data() {
     return {
-    }
+      code: "",
+      state: ""
+    };
   },
   components: {
     Loading
   },
-  async created () {
-    // if(process.env.NODE_ENV === 'production') {
-    //   this.$router.replace({name: 'start'})
-    //   login().catch(err => {
-    //     console.log(err)
-    //   })
-    // }
+  async created() {
+    this.code = this.$getQueryString("code");
+    this.state = this.$getQueryString("state");
   },
   computed: {
-    ...mapState([
-      'requestLoading'
-    ])
+    ...mapState(["requestLoading"])
   },
-  mounted () {
+  mounted() {
+    this.code = this.$getQueryString("code") || "";
+    const state = this.$getQueryString("state").split("_");
+    this.state = state[0];
+    state[1] ? this.getUserInfo() : this.getUserInfo2();
+  },
+  methods: {
+    getUserInfo() {
+      this.$store.dispatch("getUserInfo", {
+        code: this.code,
+        state: this.state
+      });
+    },
+    getUserInfo2() {
+      this.$store.dispatch("getUserInfo2", {
+        code: this.code,
+        state: this.state
+      });
+    }
   }
-}
+};
 </script>
 <style lang="scss">
-html,body {
-  height:100%;
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
-#app {
-  height:100%;
+.c {
+  text-align: center;
 }
-.mint-toast {
-  border-radius: 20px!important;
-  padding:30px 48px!important;
-  max-width:464px!important;
-  line-height:48px;
+.l {
+  text-align: left;
 }
-.mint-toast-text {
-  font-size:26px!important;
-}
-
-
 </style>
