@@ -9,7 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     userInfo: {
-      cpNum: 5,
+      cpNum: 0,
       headimgurl: null,
       isTest: false,
       nickname: '',
@@ -89,6 +89,9 @@ export default new Vuex.Store({
     },
     saveResult(state, res) {
       state.result = res
+      state.inputObj.birthday = res.birthdayStr
+      state.inputObj.childName = res.childName
+      state.inputObj.sex = res.sex
     },
     commitIsFirst(state, res) {
       state.isFirst = res

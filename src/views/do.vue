@@ -75,7 +75,7 @@ export default {
       const item = {
         score: obj.answerList[key].score,
         answer: obj.answerList[key].answer,
-        category: obj.category,
+        category: obj.category+'',
         assessId: obj.id
       };
       this.list[i] = item;
@@ -112,7 +112,7 @@ export default {
         eduId: this.eduId,
         nickName,
         headUrl,
-        isFirst: this.isFirst, 
+        isNew: this.isFirst ? 0 : 1, 
         list: this.list
       };
       submit(req).then(res => {

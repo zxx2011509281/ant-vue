@@ -17,7 +17,7 @@ export default {
   components: {
     Loading
   },
-  async created() {
+  created() {
     this.code = this.$getQueryString("code");
     this.state = this.$getQueryString("state");
   },
@@ -25,7 +25,7 @@ export default {
     ...mapState(["requestLoading"])
   },
   mounted() {
-    this.code = this.$getQueryString("code") || "";
+    this.code = this.$getQueryString("code") || '021cRcIR0A7pd62JluHR0ty6IR0cRcIt';
     const state = this.$getQueryString("state").split("_");
     this.state = state[0];
     state[1] ? this.getUserInfo() : this.getUserInfo2();

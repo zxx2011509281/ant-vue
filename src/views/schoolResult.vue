@@ -18,7 +18,7 @@
         <img src="../assets/img/book.png" />
       </div>
       <div class="books">
-        <div class="p"  v-for="item in res.rcList" :key="item.isbn">        
+        <div class="p"  v-for="item in res.rcBookList" :key="item.isbn">        
           <img :src="item.bookUrl" alt />
           <div class="title">{{item.bookName}}</div>
         </div>
@@ -62,7 +62,7 @@ this.queryResutltSchool()
     }
   },
   computed: {
-    ...mapState(["userInfo"])
+    ...mapState(["userInfo", 'eduId'])
   }
 };
 </script>

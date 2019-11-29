@@ -63,7 +63,7 @@ export default {
       this.$router.push({path: '/schoolResult', query:{id: this.eduId}})
     },
     doAgainFn(){
-      this.commit('commitIsFirst', false)
+      this.$store.commit('commitIsFirst', false)
       this.$router.push({path: '/do'})
     },
     queryResutlt(){

@@ -1,7 +1,7 @@
 import { get, json } from './fetch'
 
 
-const base = 'http://192.168.1.154:8080/';
+const base = 'http://rycp.3ikids.cn/cp/';
 
 // const fetch = function(){}
 
@@ -19,10 +19,10 @@ export function getTi(req) {
 }
 
 export function submit(req) {
-  return json(base + 'assess/list', req)
+  return json(base + 'assess/answer', req)
 }
 export function queryResutlt(req) {
-  return get(base + 'assess/rrrrrrrrrrrrrrrrrrrrrrrr', req)
+  return get(base + 'assess/personcp', req)
 }
 export function queryResutltSchool(req) {
   return get(base + 'assess/schoolcp', req)

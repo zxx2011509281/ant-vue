@@ -7,8 +7,8 @@
       <div class="introduce">快来参与阅读测评，找到孩子适合读的书 ！</div>
 
       <div class="edit-box">
-        <div class="title">互动宝宝幼儿园邀请您来测评</div>
-        <div class="join c">已经有24个小朋友参加</div>
+        <div class="title">{{userInfo.schoolName}}幼儿园邀请您来测评</div>
+        <div class="join c">已经有{{userInfo.cpNum}}个小朋友参加</div>
         <div class="line">
           <div class="left">宝贝姓名</div>
           <div class="right">
@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Bac from "../components/bac";
 export default {
   name: "home",
@@ -98,6 +99,9 @@ export default {
       });
       this.$router.push({ path: "/do" });
     }
+  },
+  computed: {
+    ...mapState(["userInfo"])
   }
 };
 </script>
