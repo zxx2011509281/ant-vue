@@ -25,8 +25,15 @@ export default {
     ...mapState(["requestLoading"])
   },
   mounted() {
-    this.code = this.$getQueryString("code") || '021cRcIR0A7pd62JluHR0ty6IR0cRcIt';
+    this.code = this.$getQueryString("code");
     const state = this.$getQueryString("state").split("_");
+
+
+    // this.state = 1;
+    // this.getUserInfo2()
+
+
+
     this.state = state[0];
     state[1] ? this.getUserInfo() : this.getUserInfo2();
   },

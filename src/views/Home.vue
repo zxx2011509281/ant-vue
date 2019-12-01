@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="line">
-          <div class="left">宝贝姓名</div>
+          <div class="left">宝贝性别</div>
           <div class="right">
             <span @click="changeRadio('male')" :class="[sex=='male' ? 'active': '', 'radio' ]">男</span>
             <span @click="changeRadio('female')" :class="[sex=='male' ? '': 'active', 'radio' ]">女</span>
@@ -79,7 +79,7 @@ export default {
           ? +date.getMonth() + 1
           : "0" + (+date.getMonth() + 1);
       const dates =
-        +date.getDate() > 9 ? +date.getDate() + 1 : "0" + (+date.getDate() + 1);
+        +date.getDate() > 9 ? +date.getDate() : "0" + (+date.getDate());
       this.birthday = date.getFullYear() + "-" + month + "-" + dates;
       this.showBirth = false;
       this.canNext = this.childName && this.birthday;

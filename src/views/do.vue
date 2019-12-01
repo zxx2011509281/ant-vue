@@ -186,10 +186,10 @@ export default {
           background: url("../assets/img/next_g.png") center/100% no-repeat;
         }
         &.pre {
-          background: url("../assets/img/pre.png") center/50% no-repeat;
+          background: url("../assets/img/pre.png") center/100% no-repeat;
         }
         &.next {
-          background: url("../assets/img/next.png") center/50% no-repeat;
+          background: url("../assets/img/next.png") center/100% no-repeat;
         }
       }
     }

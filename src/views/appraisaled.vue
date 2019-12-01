@@ -26,7 +26,7 @@
     </div>
     <div class="book-box">
       <div class="tuijian">
-        推荐给{{userInfo.nickname}}的绘本
+        推荐给{{result.childName}}的绘本
         <img src="../assets/img/book.png" />
       </div>
       <div class="books">
@@ -48,12 +48,15 @@ export default {
   components: {},
   data() {
     return {
-      isPerson: false
+      isPerson: false,
+      openid: ''
     };
   },
   created(){
     const isPerson = this.$route.query.isPerson
+    const openid = this.$route.query.openid
     this.isPerson = isPerson
+    this.openid = openid
     if(!isPerson){
       this.queryResutlt()
     }
@@ -68,7 +71,7 @@ export default {
     },
     queryResutlt(){
       queryResutlt({
-        openId: this.userInfo.openid,
+        openId: this.userInfo.openid || this.openid,
         eduId: this.eduId
       }).then(res => {
         const data = res.data;
