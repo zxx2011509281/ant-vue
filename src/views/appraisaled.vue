@@ -9,15 +9,15 @@
         <div class="top-box">
           <div :class="['name', result.sex ]">{{result.childName}}</div>
           <div class="date">{{result.birthday}}</div>
-          <div class="again" @click="doAgainFn()">再测一下</div>
+          <div class="again" @click="doAgainFn()">再测一次</div>
         </div>
         <div class="line">
-          <div class="title1">偏好设置</div>
-          <div class="text">{{result.advantage}}</div>
+          <div class="title1">偏好阅读</div>
+          <div class="text">{{result.advantage || '您的孩子能力有待提高，请继续努力'}}</div>
         </div>
         <div class="line">
           <div class="title2">建议阅读</div>
-          <div class="text">{{result.disadvantage}}</div>
+          <div class="text">{{result.disadvantage || '您的孩子非常优秀，棒棒哒！'}}</div>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@
 
     <div class="book-box">
       <div class="tuijian">
-        推荐给{{userInfo.nickname}}的绘本
+        推荐给{{userInfo.schoolName}}的绘本
         <img src="../assets/img/book.png" />
       </div>
       <div class="books">

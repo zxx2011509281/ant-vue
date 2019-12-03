@@ -52,7 +52,8 @@ export default {
       edting: true,
       list: [],
       ans: [],
-      canTap: true
+      canTap: true,
+      canSubmit: true
     };
   },
   created: function() {
@@ -115,11 +116,16 @@ export default {
         isNew: this.isFirst ? 0 : 1, 
         list: this.list
       };
+      if(!this.canSubmit)return ;
+      this.canSubmit = false;
       submit(req).then(res => {
         const data = res.data;
+        this.canSubmit = true;
         this.$store.commit('saveResult', data)
         this.$router.push({path: 'result'})
-      });
+      }).catch(err=>{
+        alert('提交报错'+err)
+      })
     }
   },
   mounted() {},

@@ -39,8 +39,11 @@ export default {
     position: absolute;
     width: 546px;
     height: 740px;
-    top: 298px;
-    left: 102px;
+    left: 50%;
+    top:45%;
+    transform: translate(-50%, -50%);
+    // top: 150px;
+    // left: 102px;
     box-shadow:0px 6px 12px rgba(152,152,152,0.1);
     background-color: #fff;
     border-radius: 12px;

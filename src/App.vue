@@ -27,14 +27,18 @@ export default {
   mounted() {
     this.code = this.$getQueryString("code");
     const state = this.$getQueryString("state").split("_");
+    this.state = state[0];
 
+    if(!this.code){
+      return window.location.href =
+            "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcf51843f06fd8ebb&redirect_uri=http://rycp.3ikids.cn/index.html&response_type=code&scope=snsapi_base&state=" +
+            this.state +
+            "#wechat_redirect";
+    }
 
     // this.state = 1;
     // this.getUserInfo2()
-
-
-
-    this.state = state[0];
+    
     state[1] ? this.getUserInfo() : this.getUserInfo2();
   },
   methods: {
