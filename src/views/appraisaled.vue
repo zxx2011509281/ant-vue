@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="wt3" @click="toschoolResultFn">
-      <span>查看{{userInfo.schoolName}}幼儿园 小朋友想读的绘本</span>
+      <span>查看{{userInfo.schoolName}} 小朋友想读的绘本</span>
     </div>
     <div class="book-box">
       <div class="tuijian">
